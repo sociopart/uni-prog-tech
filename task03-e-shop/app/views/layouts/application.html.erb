@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Store</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= link_to "My Store", products_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <li class="nav-item">
+                <%= link_to "Добавить новый товар", new_product_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Товары", products_path, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Корзина", cart_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Товары", products_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link" href="<%= edit_user_registration_path %>">
+                <%= current_user.email %>
+              </a>
+            </li>
+            <%= button_to "Выход", destroy_user_session_path, method: :delete, class: "btn btn-danger ms-2" %>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Вход", new_user_session_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Регистрация", new_user_registration_path, class: "nav-link" %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+
+<div id="content" class="container my-5">
+  <%= yield %>
+</div>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto text-center">
+        <p class="text-muted">© 2024 My Store</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>

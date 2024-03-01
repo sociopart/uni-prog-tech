@@ -1,0 +1,28 @@
+<div class="container">
+  <h1 class="mb-4">Добавить новый товар</h1>
+  <%= form_for @product, html: { multipart: true } do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, "Наименование", class: "form-label" %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :description, "Описание", class: "form-label" %>
+      <%= f.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :price, "Цена", class: "form-label" %>
+      <%= f.number_field :price, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :image, "Изображение", class: "form-label" %>
+      <%= f.file_field :image, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.submit 'Сохранить', class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

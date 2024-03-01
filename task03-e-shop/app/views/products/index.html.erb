@@ -1,0 +1,23 @@
+<h1>Список товаров</h1>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @products.each do |product| %>
+    <div class="col">
+      <div class="card w-100 shadow-sm" style="height: 100%;">
+        <% if product.image.attached? %>
+          <%= image_tag product.image, class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
+        <% else %>
+          <%= image_tag "no-photo.jpg", class: "card-img-top", style: "object-fit: cover; height: 200px;" %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title mb-2"><strong>Наименование: </strong><%= product.name %></h5>
+          <p class="card-text mb-1"><strong>Описание: </strong><%= product.description %></p>
+          <p class="card-text"><strong>Цена: </strong> <%= product.price %></p>
+          <% if current_user.admin? %>
+            <%= button_to "Удалить", product_path(product), method: :delete, data: { confirm: "Вы уверены?" }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
