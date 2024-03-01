@@ -1,0 +1,17 @@
+<!-- app/views/orders/index.html.erb -->
+
+<div class="container">
+  <h1 class="mb-4">Заказы</h1>
+
+  <% @orders.each do |order| %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title">ID: <%= order.id %></h5>
+        <p class="card-text"><strong>Имя:</strong> <%= order.name %></p>
+        <p class="card-text"><strong>Почта:</strong> <%= order.email %></p>
+        <p class="card-text"><strong>Адрес:</strong> <%= order.address %></p>
+        <!-- Другая информация о заказе -->
+      </div>
+    </div>
+  <% end %>
+</div>

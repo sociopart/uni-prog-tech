@@ -1,0 +1,36 @@
+<!-- app/views/orders/new.html.erb -->
+
+<h1>Оформление заказа</h1>
+
+<%= form_with(model: @order, url: orders_create_path) do |form| %>
+  <%= form.hidden_field :authenticity_token, value: form_authenticity_token %>
+  <!-- Добавляем скрытое поле с токеном аутентификации -->
+
+  <div class="mb-3">
+    <%= form.label :name, 'Имя' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :email, 'Электронная почта' %>
+    <%= form.email_field :email, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :address, 'Адрес' %>
+    <%= form.text_field :address, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :payment_method, 'Способ оплаты' %>
+    <%= form.select :payment_method, ['Карта', 'СБП', 'Наличные'], {}, class: 'form-control' %>
+    <!-- Выбор из списка опций для способа оплаты -->
+  </div>
+
+  <% if current_user %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <!-- Скрытое поле с user_id текущего пользователя -->
+  <% end %>
+
+  <%= form.submit 'Оформить заказ', class: 'btn btn-primary' %>
+<% end %>

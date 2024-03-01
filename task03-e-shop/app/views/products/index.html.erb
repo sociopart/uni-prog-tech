@@ -13,6 +13,10 @@
           <h5 class="card-title mb-2"><strong>Наименование: </strong><%= product.name %></h5>
           <p class="card-text mb-1"><strong>Описание: </strong><%= product.description %></p>
           <p class="card-text"><strong>Цена: </strong> <%= product.price %></p>
+          <%= form_tag cart_path, method: :post do %>
+            <%= hidden_field_tag :product_id, product.id %>
+            <%= submit_tag "Добавить в корзину", class: "btn btn-primary" %>
+          <% end %>
           <% if current_user.admin? %>
             <%= button_to "Удалить", product_path(product), method: :delete, data: { confirm: "Вы уверены?" }, class: "btn btn-danger" %>
           <% end %>
